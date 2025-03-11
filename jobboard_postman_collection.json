@@ -1,0 +1,508 @@
+{
+    "info": {
+      "_postman_id": "job-board-api",
+      "name": "Job Board API"
+    },
+    "item": [
+      {
+        "name": "Authentication",
+        "item": [
+          {
+            "name": "Register User",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "url": "{{base_url}}/auth/register",
+              "body": {
+                "Data": "raw",
+                "raw": ""
+              }
+            },
+            "Request data": [{
+                "name": "kavi",
+                "email": "kavi@gmail.com",
+                "password": "1234"
+              }
+              ],
+              "response data": [
+                {
+                    "id": 3,
+                    "name": "kavi",
+                    "email": "kavi@gmail.com",
+                    "role": "user"
+                }
+                
+              ],
+              "Response Messages": [
+                {
+                    "message": "User registered successfully"
+                  },
+                  {
+                    "message": "User registration failed"
+                  }
+              ]
+          },
+          {
+            "name": "Login User",
+            "request": {
+              "method": "POST",
+              "url": "{{base_url}}/auth/login",
+              "body": {
+                "request body": [
+                  {  "email": "kavi@gmail.com",
+                  "password": "1234" }
+                ]
+              }
+            },
+            "response": [
+                {
+                    "message": "Login successful",
+                    "role": "user",
+                    "user_id": 3,
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrYXZpQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzQxNjA0ODYyfQ.JwqhEP4lylPBlUnhGhXNxvk2L64TWQnTf77RJ7HfLyk"
+                }
+            ],
+            "Response Messages": [
+                {
+                    "message": "User Login successfully"
+                  },
+                  {
+                    "message": "User Login failed"
+                  }
+              ]
+          },
+          {
+            "name": "Get Current User",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/auth/me"
+            },
+            "response": [
+                {
+                    "id": 3,
+                    "name": "kavi",
+                    "email": "kavi@gmail.com",
+                    "role": "user"
+                }
+            ],
+            "Response Messages": [
+                {
+                    "message": "Welcome to user Dashboard"
+                  }
+              ]
+          }
+        ]
+      },
+      {
+        "name": "Admin User",
+        "request": {
+          "method": "POST",
+          "url": "{{base_url}}/auth/login",
+          "body": {
+            "request body": [
+                {
+                    "email": "admin@gmail.com",
+                    "password": "Admin@123"
+                  }
+            ]
+          }
+        },
+        "response": [
+            {
+                "message": "Login successful",
+                "role": "admin",
+                "user_id": 1,
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NDE2MDQ5NDJ9.tPbtRZxOLgiBnNkPjrFZuDwb7irx-nnTPvtih_sR5Qw"
+            }
+        ],
+        "Response Messages": [
+            {
+                "message": "Admin Login successfully"
+              },
+              {
+                "message": "Admin Login failed"
+              }
+          ]
+      },
+
+      {
+        "name": "Jobs",
+        "item": [
+          {
+            "name": "Create Job (Admin Only)",
+            "request": {
+              "method": "POST",
+              "url": "{{base_url}}/jobs/",
+              "body": {
+                "Requested Data": [
+                    {
+                        "title": "python",
+                        "description": "full stack",
+                        "company": "viyona",
+                        "location": "hyd"
+                      }
+                ]
+              }
+            },
+            "response": [
+                {
+                    "title": "python",
+                    "description": "full stack",
+                    "company": "viyona",
+                    "location": "hyd",
+                    "id": 1,
+                    "created_at": "2025-03-10T10:11:34"
+                }
+
+            ],
+            "Response Messages": [
+                {
+                    "message": "Job Created successfully"
+                  },
+                  
+              {
+                "message": "Error Occure while Creating Job"
+              }
+          ]
+          },
+
+          {
+            "name": "Get All Jobs",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/jobs/",
+              "body": {
+                "Requested Data": [
+                    {
+                      }
+                ]
+              }
+            },
+            "response": [
+                {
+                    "title": "python developer",
+                    "description": "full stck",
+                    "company": "viyona",
+                    "location": "hyd",
+                    "id": 1,
+                    "created_at": "2025-03-10T10:11:34"
+                },
+                {
+                    "title": "java",
+                    "description": "full stack",
+                    "company": "viyona fintech",
+                    "location": "hyd",
+                    "id": 2,
+                    "created_at": "2025-03-10T10:12:15"
+                },
+                {
+                    "title": "tester",
+                    "description": "tesred",
+                    "company": "viyons",
+                    "location": "tpt",
+                    "id": 3,
+                    "created_at": "2025-03-10T17:13:31"
+                }
+            ], 
+            "Response Messages": [
+                {
+                    "message": "Job Featched successfully"
+                },
+                  
+              {
+                "message": "Job featching Failed"
+              }
+          ]
+          },
+
+          {
+            "name": "Get Job by ID",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/jobs/1",
+              "body": {
+                "Requested Data": [
+                    {
+                        "job_id": "11"
+                    }
+                ]
+              }
+            },
+            "response": [
+                {
+                    "title": "python developer",
+                    "description": "full stck",
+                    "company": "viyona",
+                    "location": "hyd",
+                    "id": 1,
+                    "created_at": "2025-03-10T10:11:34"
+                }
+            ],
+             "Response Messages": [
+                {
+                    "message": "Job Feached successfully"
+                  },
+                  
+              {
+                "message": "Jb fetching with id getting error"
+              }
+          ]
+          },
+
+          {
+            "name": "Get Pegination In Jobs",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/jobs/paginated",
+              "body": {
+                "Requested Data": [
+                    {
+                        "page": 0,
+                        "size": 10
+                      }
+                ]
+              }
+            },
+            "response": [
+                {
+                    "title": "python developer",
+                    "description": "full stck",
+                    "company": "viyona",
+                    "location": "hyd",
+                    "id": 1,
+                    "created_at": "2025-03-10T10:11:34"
+                },
+                {
+                    "title": "java",
+                    "description": "full stack",
+                    "company": "viyona fintech",
+                    "location": "hyd",
+                    "id": 2,
+                    "created_at": "2025-03-10T10:12:15"
+                },
+                {
+                    "title": "tester",
+                    "description": "tesred",
+                    "company": "viyons",
+                    "location": "tpt",
+                    "id": 3,
+                    "created_at": "2025-03-10T17:13:31"
+                }
+            ]
+          },
+
+          {
+            "name": "Update Job (Admin Only)",
+            "request": {
+              "method": "PUT",
+              "url": "{{base_url}}/jobs/1",
+              "body": {
+                "Requested Data": [
+                    {
+                            "title": "python developer",
+                            "description": "full stack",
+                            "company": "tcs",
+                            "location": "hyd"
+                      }
+                ]
+              }
+            },
+            "response": [
+                {
+                   "title": "python developer",
+                    "description": "full stack",
+                    "company": "tcs",
+                    "location": "hyd",
+                    "id": 1,
+                    "created_at": "2025-03-10T17:13:31"
+                }
+            ],
+            "Response Messages": [
+                {
+                    "message": "Job Updated successfully"
+                  },
+                  
+              {
+                "message": "Jb Updation Failed"
+              }
+          ]
+          },
+
+          {
+            "name": "Delete Job (Admin Only)",
+            "request": {
+              "method": "DELETE",
+              "url": "{{base_url}}/jobs/1",
+              "body": {
+                "Requested Data": [
+                    {
+                        "job_id": "3"
+                    }
+                ]
+              }
+            },
+            "response": [],
+            "Response Messages": [
+                {
+                    "message": "Job deleted successfully"
+                  },
+                  
+              {
+                "message": "Error Occure While job Deleting"
+              }
+          ]
+          }
+        ]
+      },
+
+
+      {
+        "name": "Applications",
+        "item": [
+          {
+            "name": "Apply for a Job",
+            "request": {
+              "method": "POST",
+              "url": "{{base_url}}/applications/",
+              "body": {
+                "Requested Data": [
+                    {
+                        "job_id": 1,
+                        "user_id": 2
+                      }
+                      
+                ]
+              }
+            },
+            "response": [
+                {
+                    "id": 1,
+                    "job_id": 1,
+                    "user_id": 4,
+                    "status": "Pending",
+                    "applied_at": "2025-03-10T10:15:41"
+                }
+            ],
+            "Response Messages": [
+                {
+                    "message": "Job Applied successfully"
+                  },
+                  
+              {
+                "message": "Error Occure While Appling job! try againg"
+              }
+          ]
+          },
+
+
+          {
+            "name": "Get User Applications/my-applications",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/applications/my-applications",
+              "body": {
+                "Requested Data": [
+                    {
+                      }
+                      
+                ]
+              }
+            },
+            "response": [
+                {
+                    "id": 1,
+                    "job_id": 1,
+                    "user_id": 4,
+                    "status": "Pending",
+                    "applied_at": "2025-03-10T10:15:41"
+                },
+
+                {
+                    "id": 1,
+                    "job_id": 1,
+                    "user_id": 4,
+                    "status": "Approvd",
+                    "applied_at": "2025-03-10T10:15:50"
+                }
+            ]
+          },
+
+
+          {
+            "name": "Get User Applications/my-applications",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/applications/my-applications",
+              "body": {
+                "Requested Data": [
+                    {
+                      }
+                      
+                ]
+              }
+            },
+            "response": [
+                {
+                    "id": 1,
+                    "job_id": 1,
+                    "user_id": 4,
+                    "status": "Pending",
+                    "applied_at": "2025-03-10T10:15:41"
+                },
+
+                {
+                    "id": 1,
+                    "job_id": 1,
+                    "user_id": 4,
+                    "status": "Approvd",
+                    "applied_at": "2025-03-10T10:15:50"
+                }
+            ]
+          },
+
+          {
+            "name": "Get Applications for a Job (Admin Only)",
+            "request": {
+              "method": "GET",
+              "url": "{{base_url}}/applications/1",
+              "body": {
+                "Requested Data": [
+                    {
+                      }
+                      
+                ]
+              }
+            },
+            "response": [
+                {
+                    "id": 1,
+                    "job_id": 1,
+                    "user_id": 4,
+                    "status": "Pending",
+                    "applied_at": "2025-03-10T10:15:41"
+                }
+            ]
+          },
+          {
+            "name": "Update Application Status (Admin Only)",
+            "request": {
+              "method": "PUT",
+              "url": "{{base_url}}/applications/1",
+              "body": {
+                     "new_status": "Approved"
+              }
+            },
+            "response": [
+                {
+                    "message": "Application status updated successfully"
+                }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      { "key": "base_url", "value": "http://127.0.0.1:8000" }
+    ]
+  }
+  
